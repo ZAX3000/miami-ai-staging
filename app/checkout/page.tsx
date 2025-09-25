@@ -12,7 +12,7 @@ import { Input } from '@/components/ui/input';
 import { ArrowLeft, CreditCard, Loader2 } from 'lucide-react';
 import Link from 'next/link';
 import { toast } from 'sonner';
-import { betterauthClient } from '@/lib/auth-client';
+import { authClient } from '@/lib/auth-client';
 import { useRouter } from 'next/navigation';
 import { useLocation } from '@/hooks/use-location';
 import { useSession } from '@/lib/auth-client';
@@ -125,42 +125,20 @@ export default function CheckoutPage() {
           (discountConfig.percentage || discountConfig.inrPrice);
   };
 
-  const onSubmit = async (data: CheckoutFormData) => {
+  const onSubmit = async () => {
     setIsLoading(true);
     try {
-      const { data: checkout, error } = await betterauthClient.dodopayments.checkout({
-        slug: process.env.NEXT_PUBLIC_PREMIUM_SLUG,
-        customer: {
-          email: data.customer.email,
-          name: data.customer.name,
-        },
-        billing: {
-          city: data.billing.city,
-          country: 'IN', // Always India
-          state: data.billing.state,
-          street: data.billing.street,
-          zipcode: data.billing.zipcode,
-        },
-        referenceId: `order_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`,
+      await authClient.checkout({
+        slug: process.env.NEXT_PUBLIC_STARTER_SLUG!, // or products: [NEXT_PUBLIC_STARTER_TIER]
+        allowDiscountCodes: true,
       });
-
-      if (error) {
-        throw new Error(error.message || 'Checkout failed');
-      }
-
-      if (checkout?.url) {
-        // Redirect to DodoPayments checkout
-        window.location.href = checkout.url;
-      } else {
-        throw new Error('No checkout URL received');
-      }
-    } catch (error) {
-      console.error('Checkout error:', error);
-      toast.error(error instanceof Error ? error.message : 'Something went wrong. Please try again.');
+    } catch (e) {
+      toast.error('Checkout failed');
     } finally {
       setIsLoading(false);
     }
   };
+
 
   // Redirect if not authenticated
   if (!isPending && !session) {
@@ -226,7 +204,7 @@ export default function CheckoutPage() {
               for 1 month access
             </div>
             <div className="text-xs text-muted-foreground text-center space-y-1">
-              <p>GST and tax details will be calculated and shown during checkout</p>
+              <p>Tax details will be calculated and shown during checkout</p>
               <p>
                 Prefer a subscription?{' '}
                 <Link href="/pricing" className="underline hover:text-foreground">
@@ -297,7 +275,7 @@ export default function CheckoutPage() {
                       <FormItem>
                         <FormLabel>Street Address</FormLabel>
                         <FormControl>
-                          <Input placeholder="123 Main Street, Apartment 4B" {...field} />
+                          <Input placeholder="123 Main Street" {...field} />
                         </FormControl>
                         <FormMessage />
                       </FormItem>
@@ -311,7 +289,7 @@ export default function CheckoutPage() {
                         <FormItem>
                           <FormLabel>City</FormLabel>
                           <FormControl>
-                            <Input placeholder="Mumbai" {...field} />
+                            <Input placeholder="Maimi" {...field} />
                           </FormControl>
                           <FormMessage />
                         </FormItem>
@@ -324,7 +302,7 @@ export default function CheckoutPage() {
                         <FormItem>
                           <FormLabel>State/Province</FormLabel>
                           <FormControl>
-                            <Input placeholder="Maharashtra" {...field} />
+                            <Input placeholder="Florida" {...field} />
                           </FormControl>
                           <FormMessage />
                         </FormItem>
@@ -352,7 +330,7 @@ export default function CheckoutPage() {
                         <FormItem>
                           <FormLabel>Country</FormLabel>
                           <FormControl>
-                            <Input value="India" disabled className="bg-zinc-50 dark:bg-zinc-900" />
+                            <Input value="America" disabled className="bg-zinc-50 dark:bg-zinc-900" />
                           </FormControl>
                           <FormMessage />
                         </FormItem>
@@ -400,26 +378,9 @@ export default function CheckoutPage() {
                 <li>GST and applicable taxes will be calculated automatically during checkout</li>
                 <li>Tax breakdown will be clearly displayed before final payment confirmation</li>
                 <li>A detailed invoice with all charges and tax details will be sent to your email</li>
-                <li>Invoice will include GST registration details as per Indian tax regulations</li>
               </ul>
             </CardContent>
           </Card>
-        </div>
-
-        {/* Security Notice */}
-        <div className="mt-8 text-center">
-          <div className="bg-zinc-50 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-lg px-6 py-4 inline-block">
-            <p className="text-sm text-zinc-700 dark:text-zinc-300">
-              🔒 Secure checkout powered by{' '}
-              <Link
-                href="https://dodopayments.com"
-                target="_blank"
-                className="underline hover:text-foreground transition-colors"
-              >
-                DodoPayments
-              </Link>
-            </p>
-          </div>
         </div>
       </div>
     </div>

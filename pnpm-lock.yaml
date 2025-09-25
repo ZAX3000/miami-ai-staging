@@ -47,12 +47,6 @@ importers:
       '@daytonaio/sdk':
         specifier: ^0.102.0
         version: 0.102.0(ws@8.18.3)
-      '@dodopayments/better-auth':
-        specifier: ^1.1.2
-        version: 1.1.2(dodopayments@2.0.2)(encoding@0.1.13)(zod@3.25.76)
-      '@dodopayments/core':
-        specifier: ^0.1.16
-        version: 0.1.16(encoding@0.1.13)(zod@3.25.76)
       '@eslint/plugin-kit':
         specifier: 0.3.4
         version: 0.3.4
@@ -212,9 +206,6 @@ importers:
       date-fns:
         specifier: ^4.1.0
         version: 4.1.0
-      dodopayments:
-        specifier: 2.0.2
-        version: 2.0.2
       dotenv:
         specifier: ^16.5.0
         version: 16.6.1
@@ -709,18 +700,6 @@ packages:
 
   '@daytonaio/sdk@0.102.0':
     resolution: {integrity: sha512-MAHCUa4/Kxy6cOmfUhatZoWXHAUwbTPRKUDP1zvN+vioDDTzN6kud+mxCYF5AmttkkR5zg2WQuBukRQTQ1YiIg==}
-
-  '@dodopayments/better-auth@1.1.2':
-    resolution: {integrity: sha512-cD5hCadUVxsoaqjpYwg/BeA0gG9EEOyuI8dSOjYQl43qMssbKLHiRAd4TaYlpQfRTgSD3qS5tNnBoHCOLmm+DA==}
-    engines: {node: '>=16.0.0'}
-    peerDependencies:
-      dodopayments: ^1.42.0
-      zod: ^3.0.0
-
-  '@dodopayments/core@0.1.16':
-    resolution: {integrity: sha512-Et4+XEYn0rb2wvFsV9Rku9OXqmDOkdJ1L2xFZE9DP7iyutidsgsBD/nnjMMIS9eQj3EYn2JEYPEYiSjKjoI5iA==}
-    peerDependencies:
-      zod: ^3.25.74
 
   '@drizzle-team/brocli@0.10.2':
     resolution: {integrity: sha512-z33Il7l5dKjUgGULTqBsQBQwckHh5AbIuxhdsIxDDiZAzBOrZO6q9ogcWC65kU382AfynTfgNumVcNIjuIua6w==}
@@ -3372,13 +3351,6 @@ packages:
   doctrine@2.1.0:
     resolution: {integrity: sha512-35mSku4ZXK0vfCuHEDAwt55dg2jNajHZ1odvF+8SSr82EsZY4QmXfuWso8oEd8zRhVObSN18aM0CjSdoBX7zIw==}
     engines: {node: '>=0.10.0'}
-
-  dodopayments@1.52.5:
-    resolution: {integrity: sha512-Qgg8Q3DV48BfUr6xXEVnY8pK6w3WoPhg+vjiCP6BxQVQsTFxRw7RcCmm5RfcJjdzcpR5+fu7YZXQPdeL3p03Bw==}
-
-  dodopayments@2.0.2:
-    resolution: {integrity: sha512-tPcMdFwwpe6YdEAwBX8LE9tM4KMDnanVgSKFLJ8UfWfWQP9zQXPVOwUJrhC4NGASXSf2oJRMmM8bdVrFnydTtA==}
-    hasBin: true
 
   dom-helpers@5.2.1:
     resolution: {integrity: sha512-nRCa7CK3VTrM2NmGkIy4cbK7IZlgBE/PYMn55rrXefr5xXDP0LdtfPnblFDoVdcAfslJ7or6iqAUnx0CCGIWQA==}
@@ -6464,22 +6436,6 @@ snapshots:
       - debug
       - ws
 
-  '@dodopayments/better-auth@1.1.2(dodopayments@2.0.2)(encoding@0.1.13)(zod@3.25.76)':
-    dependencies:
-      '@dodopayments/core': 0.1.16(encoding@0.1.13)(zod@3.25.76)
-      dodopayments: 2.0.2
-      zod: 3.25.76
-    transitivePeerDependencies:
-      - encoding
-
-  '@dodopayments/core@0.1.16(encoding@0.1.13)(zod@3.25.76)':
-    dependencies:
-      dodopayments: 1.52.5(encoding@0.1.13)
-      standardwebhooks: 1.0.0
-      zod: 3.25.76
-    transitivePeerDependencies:
-      - encoding
-
   '@drizzle-team/brocli@0.10.2': {}
 
   '@emnapi/core@1.4.5':
@@ -9095,20 +9051,6 @@ snapshots:
   doctrine@2.1.0:
     dependencies:
       esutils: 2.0.3
-
-  dodopayments@1.52.5(encoding@0.1.13):
-    dependencies:
-      '@types/node': 18.19.123
-      '@types/node-fetch': 2.6.13
-      abort-controller: 3.0.0
-      agentkeepalive: 4.6.0
-      form-data-encoder: 1.7.2
-      formdata-node: 4.4.1
-      node-fetch: 2.7.0(encoding@0.1.13)
-    transitivePeerDependencies:
-      - encoding
-
-  dodopayments@2.0.2: {}
 
   dom-helpers@5.2.1:
     dependencies:
