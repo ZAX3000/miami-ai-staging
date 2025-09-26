@@ -337,16 +337,31 @@ const ChatInterface = memo(
         }
 
         // Only generate suggested questions if authenticated user or private chat
-        if (message.parts && message.role === 'assistant' && (user || chatState.selectedVisibilityType === 'private')) {
-          const lastPart = message.parts[message.parts.length - 1];
-          const lastPartText = lastPart.type === 'text' ? lastPart.text : '';
-          const newHistory = [
-            { role: 'user', content: lastSubmittedQueryRef.current },
-            { role: 'assistant', content: lastPartText },
-          ];
-          console.log('newHistory', newHistory);
-          const { questions } = await suggestQuestions(newHistory);
-          dispatch({ type: 'SET_SUGGESTED_QUESTIONS', payload: questions });
+        // Only generate suggested questions if authenticated user or private chat
+        if (message.role === 'assistant' && (user || chatState.selectedVisibilityType === 'private')) {
+          const parts = Array.isArray(message.parts) ? message.parts : [];
+          const lastPart = parts.length ? parts[parts.length - 1] : undefined;
+
+          // Prefer the last text part; fall back to string content if present
+          const lastPartText =
+            lastPart && lastPart.type === 'text' && typeof lastPart.text === 'string'
+              ? lastPart.text
+              : typeof (message as any).content === 'string'
+                ? (message as any).content
+                : '';
+
+          if (lastPartText) {
+            const newHistory = [
+              { role: 'user', content: lastSubmittedQueryRef.current },
+              { role: 'assistant', content: lastPartText },
+            ];
+            try {
+              const { questions } = await suggestQuestions(newHistory);
+              dispatch({ type: 'SET_SUGGESTED_QUESTIONS', payload: questions });
+            } catch (e) {
+              console.error('Error generating suggested questions:', e);
+            }
+          }
         }
       },
       onError: (error) => {
@@ -695,7 +710,7 @@ const ChatInterface = memo(
               <div className="text-center m-0 mb-2">
                 <div className="inline-flex items-center gap-3">
                   <h1 className="text-4xl sm:text-5xl !mb-0 text-foreground dark:text-foreground font-be-vietnam-pro! font-light tracking-tighter">
-                    miami
+                    MIAMI.AI
                   </h1>
                   {isUserPro && (
                     <h1 className="text-2xl font-baumans! leading-4 inline-block !px-3 !pt-1 !pb-2.5 rounded-xl shadow-sm !m-0 !mt-2 bg-gradient-to-br from-secondary/25 via-primary/20 to-accent/25 text-foreground ring-1 ring-ring/35 ring-offset-1 ring-offset-background dark:bg-gradient-to-br dark:from-primary dark:via-secondary dark:to-primary dark:text-foreground">

@@ -139,7 +139,27 @@ export async function POST(req: Request) {
   const requestStartTime = Date.now();
   const { messages, model, group, timezone, id, selectedVisibilityType, isCustomInstructionsEnabled, searchProvider, selectedConnectors } =
     await req.json();
-  const { latitude, longitude } = geolocation(req);
+
+  let latitude: number | undefined;
+  let longitude: number | undefined;
+
+  try {
+    const loc = geolocation?.(req) as { latitude?: string; longitude?: string } | undefined;
+
+    // Fallback to headers if needed
+    const latStr = loc?.latitude ?? req.headers.get('x-vercel-ip-latitude') ?? undefined;
+    const lonStr = loc?.longitude ?? req.headers.get('x-vercel-ip-longitude') ?? undefined;
+
+    const latNum = latStr !== undefined ? Number(latStr) : undefined;
+    const lonNum = lonStr !== undefined ? Number(lonStr) : undefined;
+
+    if (Number.isFinite(latNum) && Number.isFinite(lonNum)) {
+      latitude = latNum as number;
+      longitude = lonNum as number;
+    }
+  } catch {
+    // ignore — no geo in Node / local dev
+  }
 
   console.log('--------------------------------');
   console.log('Location: ', latitude, longitude);
@@ -694,11 +714,21 @@ export async function POST(req: Request) {
   });
   const streamContext = getStreamContext();
 
-  if (streamContext) {
-    return new Response(
-      await streamContext.resumableStream(streamId, () => stream.pipeThrough(new JsonToSseTransformStream())),
-    );
-  } else {
-    return new Response(stream.pipeThrough(new JsonToSseTransformStream()));
+  // Use resumable streams only for authenticated users *and* when a healthy context exists.
+  // Guests get plain SSE, which avoids Redis entirely.
+  if (user && streamContext) {
+    try {
+      return new Response(
+        await streamContext.resumableStream(streamId, () =>
+          stream.pipeThrough(new JsonToSseTransformStream()),
+        ),
+      );
+    } catch (e) {
+      // Failsafe: if Redis is misconfigured, don’t blow up the request.
+      console.error('Resumable stream failed, falling back to plain SSE:', e);
+    }
   }
+
+  return new Response(stream.pipeThrough(new JsonToSseTransformStream()));
+
 }
