@@ -65,11 +65,11 @@ const ChatInterface = memo(
     const [q] = useQueryState('q', parseAsString.withDefault(''));
     const [input, setInput] = useState<string>('');
 
-    const [selectedModel, setSelectedModel] = useLocalStorage('scira-selected-model', 'scira-default');
-    const [selectedGroup, setSelectedGroup] = useLocalStorage<SearchGroupId>('scira-selected-group', 'web');
+    const [selectedModel, setSelectedModel] = useLocalStorage('miami-selected-model', 'miami-default');
+    const [selectedGroup, setSelectedGroup] = useLocalStorage<SearchGroupId>('miami-selected-group', 'web');
     const [selectedConnectors, setSelectedConnectors] = useState<ConnectorProvider[]>([]);
     const [isCustomInstructionsEnabled, setIsCustomInstructionsEnabled] = useLocalStorage(
-      'scira-custom-instructions-enabled',
+      'miami-custom-instructions-enabled',
       true,
     );
 
@@ -121,20 +121,20 @@ const ChatInterface = memo(
 
     // Get persisted values for dialog states
     const [persistedHasShownUpgradeDialog, setPersitedHasShownUpgradeDialog] = useLocalStorage(
-      'scira-upgrade-prompt-shown',
+      'miami-upgrade-prompt-shown',
       false,
     );
     const [persistedHasShownSignInPrompt, setPersitedHasShownSignInPrompt] = useLocalStorage(
-      'scira-signin-prompt-shown',
+      'miami-signin-prompt-shown',
       false,
     );
     const [persistedHasShownLookoutAnnouncement, setPersitedHasShownLookoutAnnouncement] = useLocalStorage(
-      'scira-lookout-announcement-shown',
+      'miami-lookout-announcement-shown',
       false,
     );
 
     const [searchProvider, _] = useLocalStorage<'exa' | 'parallel' | 'tavily' | 'firecrawl'>(
-      'scira-search-provider',
+      'miami-search-provider',
       'firecrawl',
     );
 
@@ -208,9 +208,9 @@ const ChatInterface = memo(
 
       // If current model requires pro but user is not pro, switch to default
       // Also prevent infinite loops by ensuring we're not already on the default model
-      if (currentModelRequiresPro && !isUserPro && selectedModel !== 'scira-default') {
-        console.log(`Auto-switching from pro model '${selectedModel}' to 'scira-default' - user lost pro access`);
-        setSelectedModel('scira-default');
+      if (currentModelRequiresPro && !isUserPro && selectedModel !== 'miami-default') {
+        console.log(`Auto-switching from pro model '${selectedModel}' to 'miami-default' - user lost pro access`);
+        setSelectedModel('miami-default');
 
         // Show a toast notification to inform the user
         toast.info('Switched to default model - Pro subscription required for premium models');
@@ -695,7 +695,7 @@ const ChatInterface = memo(
               <div className="text-center m-0 mb-2">
                 <div className="inline-flex items-center gap-3">
                   <h1 className="text-4xl sm:text-5xl !mb-0 text-foreground dark:text-foreground font-be-vietnam-pro! font-light tracking-tighter">
-                    scira
+                    miami
                   </h1>
                   {isUserPro && (
                     <h1 className="text-2xl font-baumans! leading-4 inline-block !px-3 !pt-1 !pb-2.5 rounded-xl shadow-sm !m-0 !mt-2 bg-gradient-to-br from-secondary/25 via-primary/20 to-accent/25 text-foreground ring-1 ring-ring/35 ring-offset-1 ring-offset-background dark:bg-gradient-to-br dark:from-primary dark:via-secondary dark:to-primary dark:text-foreground">

@@ -424,9 +424,9 @@ const ModelSwitcher: React.FC<ModelSwitcherProps> = React.memo(
 
       // If current model requires pro but user is not pro, switch to default
       // Also prevent infinite loops by ensuring we're not already on the default model
-      if (currentModelExists && currentModelRequiresPro && !isProUser && selectedModel !== 'scira-default') {
-        console.log(`Auto-switching from pro model '${selectedModel}' to 'scira-default' - user lost pro access`);
-        setSelectedModel('scira-default');
+      if (currentModelExists && currentModelRequiresPro && !isProUser && selectedModel !== 'miami-default') {
+        console.log(`Auto-switching from pro model '${selectedModel}' to 'miami-default' - user lost pro access`);
+        setSelectedModel('miami-default');
 
         // Show a toast notification to inform the user
         toast.info('Switched to default model - Pro subscription required for premium models');
@@ -1062,7 +1062,7 @@ const ModelSwitcher: React.FC<ModelSwitcherProps> = React.memo(
                         </>
                       ) : (
                         <div className="flex items-center gap-3 flex-wrap">
-                          <span className="text-xl sm:text-2xl font-be-vietnam-pro">Scira</span>
+                          <span className="text-xl sm:text-2xl font-be-vietnam-pro">Miami</span>
                           <ProBadge className="!text-white !bg-white/20 !ring-white/30 font-extralight" />
                         </div>
                       )}
@@ -1153,7 +1153,7 @@ const ModelSwitcher: React.FC<ModelSwitcherProps> = React.memo(
               <div className="flex items-center gap-4">
                 <CheckIcon className="size-4 text-primary flex-shrink-0" />
                 <div className="space-y-1">
-                  <p className="text-sm font-medium text-foreground">Scira Lookout</p>
+                  <p className="text-sm font-medium text-foreground">Miami Lookout</p>
                   <p className="text-xs text-muted-foreground">Automated search monitoring on your schedule</p>
                 </div>
               </div>
@@ -1690,7 +1690,7 @@ const GroupModeToggle: React.FC<GroupSelectorProps> = React.memo(
     const isExtreme = selectedGroup === 'extreme';
 
     // Get search provider from localStorage with reactive updates
-    const [searchProvider] = useLocalStorage<SearchProvider>('scira-search-provider', 'firecrawl');
+    const [searchProvider] = useLocalStorage<SearchProvider>('miami-search-provider', 'firecrawl');
 
     // Get dynamic search groups based on the selected search provider
     const dynamicSearchGroups = useMemo(() => getSearchGroups(searchProvider), [searchProvider]);
@@ -3739,7 +3739,7 @@ const FormComponent: React.FC<FormComponentProps> = ({
               <div className="flex items-center gap-4">
                 <CheckIcon className="size-4 text-primary flex-shrink-0" />
                 <div className="space-y-1">
-                  <p className="text-sm font-medium text-foreground">Scira Lookout</p>
+                  <p className="text-sm font-medium text-foreground">Miami Lookout</p>
                   <p className="text-xs text-muted-foreground">Automated search monitoring on your schedule</p>
                 </div>
               </div>

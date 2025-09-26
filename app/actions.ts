@@ -8,7 +8,7 @@ import { generateObject, UIMessage, generateText } from 'ai';
 import type { ModelMessage } from 'ai';
 import { z } from 'zod';
 import { getUser } from '@/lib/auth-utils';
-import { scira } from '@/ai/providers';
+import { miami } from '@/ai/providers';
 import {
   getChatsByUserId,
   deleteChatById,
@@ -64,7 +64,7 @@ export async function suggestQuestions(history: any[]) {
   console.log(history);
 
   const { object } = await generateObject({
-    model: scira.languageModel('scira-grok-3'),
+    model: miami.languageModel('miami-grok-3'),
     system: `You are a search engine follow up query/questions generator. You MUST create EXACTLY 3 questions for the search engine based on the conversation history.
 
 ### Question Generation Guidelines:
@@ -131,7 +131,7 @@ export async function checkImageModeration(images: string[]) {
 
 export async function generateTitleFromUserMessage({ message }: { message: UIMessage }) {
   const { text: title } = await generateText({
-    model: scira.languageModel('scira-name'),
+    model: miami.languageModel('miami-name'),
     system: `You are an expert title generator. You are given a message and you need to generate a short title based on it.
 
     - you will generate a short title based on the first message a user begins a conversation with
@@ -177,7 +177,7 @@ Guidelines (MANDATORY):
 - Just return the improved prompt text in plain text format, no other text or commentary or markdown or anything else!!`;
 
     const { text } = await generateText({
-      model: scira.languageModel('scira-enhance'),
+      model: miami.languageModel('miami-enhance'),
       temperature: 0.6,
       topP: 0.95,
       maxOutputTokens: 1024,
@@ -240,7 +240,7 @@ const groupTools = {
 
 const groupInstructions = {
   web: `
-  You are an AI web search engine called Scira, designed to help users find information on the internet with no unnecessary chatter and more focus on the content and responsed with markdown format and the response guidelines below.
+  You are an AI web search engine called Miami, designed to help users find information on the internet with no unnecessary chatter and more focus on the content and responsed with markdown format and the response guidelines below.
   'You MUST run the tool IMMEDIATELY on receiving any user message' before composing your response. **This is non-negotiable.**
   Today's Date: ${new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: '2-digit', weekday: 'short' })}
 
@@ -825,7 +825,7 @@ const groupInstructions = {
   - Do not include images in responses`,
 
   chat: `
-  You are Scira, a helpful assistant that helps with the task asked by the user.
+  You are Miami, a helpful assistant that helps with the task asked by the user.
   Today's date is ${new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: '2-digit', weekday: 'short' })}.
 
   ### Guidelines:
@@ -1691,11 +1691,11 @@ export async function createScheduledLookout({
 
           if (delay > 0) {
             await qstash.publish({
-              // if dev env use localhost:3000/api/lookout, else use scira.ai/api/lookout
+              // if dev env use localhost:3000/api/lookout, else use miami.ai/api/lookout
               url:
                 process.env.NODE_ENV === 'development'
                   ? process.env.NGROK_URL + '/api/lookout'
-                  : `https://scira.ai/api/lookout`,
+                  : `https://miami.ai/api/lookout`,
               body: JSON.stringify({
                 lookoutId: lookout.id,
                 prompt,
@@ -1725,11 +1725,11 @@ export async function createScheduledLookout({
           console.log('📅 Cron schedule with timezone:', cronSchedule);
 
           const scheduleResponse = await qstash.schedules.create({
-            // if dev env use localhost:3000/api/lookout, else use scira.ai/api/lookout
+            // if dev env use localhost:3000/api/lookout, else use miami.ai/api/lookout
             destination:
               process.env.NODE_ENV === 'development'
                 ? process.env.NGROK_URL + '/api/lookout'
-                : `https://scira.ai/api/lookout`,
+                : `https://miami.ai/api/lookout`,
             method: 'POST',
             cron: cronSchedule,
             body: JSON.stringify({
@@ -1925,11 +1925,11 @@ export async function updateLookoutAction({
 
         // Create new schedule with updated cron
         const scheduleResponse = await qstash.schedules.create({
-          // if dev env use localhost:3000/api/lookout, else use scira.ai/api/lookout
+          // if dev env use localhost:3000/api/lookout, else use miami.ai/api/lookout
           destination:
             process.env.NODE_ENV === 'development'
               ? process.env.NGROK_URL + '/api/lookout'
-              : `https://scira.ai/api/lookout`,
+              : `https://miami.ai/api/lookout`,
           method: 'POST',
           cron: cronSchedule,
           body: JSON.stringify({
@@ -2031,7 +2031,7 @@ export async function testLookoutAction({ id }: { id: string }) {
 
     // Make a POST request to the lookout API endpoint to trigger the run
     const response = await fetch(
-      process.env.NODE_ENV === 'development' ? process.env.NGROK_URL + '/api/lookout' : `https://scira.ai/api/lookout`,
+      process.env.NODE_ENV === 'development' ? process.env.NGROK_URL + '/api/lookout' : `https://miami.ai/api/lookout`,
       {
         method: 'POST',
         headers: {

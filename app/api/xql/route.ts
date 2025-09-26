@@ -15,7 +15,7 @@ import {
 import { ChatSDKError } from '@/lib/errors';
 
 import { markdownJoinerTransform } from '@/lib/parser';
-import { scira } from '@/ai/providers';
+import { miami } from '@/ai/providers';
 
 import { z } from 'zod';
 import { GroqProviderOptions } from '@ai-sdk/groq';
@@ -67,7 +67,7 @@ const xqlTool = tool({
         console.log('X search - includeHandles:', normalizedInclude, 'excludeHandles:', normalizedExclude);
 
         const result = await generateText({
-            model: scira.languageModel('scira-grok-4-fast'),
+            model: miami.languageModel('miami-grok-4-fast'),
             prompt: query,
             maxOutputTokens: 10,
             providerOptions: {
@@ -127,7 +127,7 @@ export async function POST(req: Request) {
     }
 
     const result = streamText({
-        model: scira.languageModel('scira-grok-4-fast'),
+        model: miami.languageModel('miami-grok-4-fast'),
         messages: convertToModelMessages(messages),
         stopWhen: hasToolCall('xql'),
         onAbort: ({ steps }) => {

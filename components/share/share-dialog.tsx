@@ -39,7 +39,7 @@ export function ShareDialog({
   const [isChangingVisibility, setIsChangingVisibility] = useState(false);
 
   // Generate the share URL
-  const shareUrl = chatId ? `https://scira.ai/search/${chatId}` : '';
+  const shareUrl = chatId ? `https://miami.ai/search/${chatId}` : '';
 
   // Reset copied state when dialog opens/closes
   useEffect(() => {
@@ -146,7 +146,7 @@ export function ShareDialog({
     console.log('📱 Using native share API:', shareUrl);
     try {
       await navigator.share({
-        title: 'Shared Scira Chat',
+        title: 'Shared Miami Chat',
         url: shareUrl,
       });
       console.log('✅ Native share completed');

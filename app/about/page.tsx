@@ -49,7 +49,7 @@ import { LOOKOUT_LIMITS } from '@/app/lookout/constants';
 import { PRICING, SEARCH_LIMITS } from '@/lib/constants';
 
 import { ThemeSwitcher } from '@/components/theme-switcher';
-import { SciraLogo } from '@/components/logos/scira-logo';
+import { MiamiLogo } from '@/components/logos/miami-logo';
 
 export default function AboutPage() {
   const router = useRouter();
@@ -115,7 +115,7 @@ export default function AboutPage() {
               <div className="flex items-center gap-2 text-amber-800 dark:text-amber-200">
                 <ShieldCheck className="h-4 w-4" />
                 <span className="text-sm font-medium">
-                  Scira is not connected to any cryptocurrency tokens or coins. We are purely an AI search engine.
+                  Miami is not connected to any cryptocurrency tokens or coins. We are purely an AI search engine.
                 </span>
               </div>
               <button
@@ -153,7 +153,7 @@ export default function AboutPage() {
                 Terms of Service
               </h3>
               <p className="text-xs text-muted-foreground">
-                By using Scira, you agree to our Terms of Service which outline the rules for using our platform.
+                By using Miami, you agree to our Terms of Service which outline the rules for using our platform.
               </p>
               <Link href="/terms" className="text-xs text-primary hover:underline inline-flex items-center">
                 Read full Terms of Service
@@ -205,9 +205,9 @@ export default function AboutPage() {
             {/* Logo */}
             <Link href="/" className="flex items-center gap-3 group">
               <div className="relative">
-                <SciraLogo className="size-8 transition-transform group-hover:scale-110" />
+                <MiamiLogo className="size-8 transition-transform group-hover:scale-110" />
               </div>
-              <span className="text-xl font-bold tracking-tight">Scira</span>
+              <span className="text-xl font-bold tracking-tight">Miami</span>
             </Link>
 
             {/* Desktop Navigation */}
@@ -243,7 +243,7 @@ export default function AboutPage() {
             {/* Right Side Actions */}
             <div className="flex items-center gap-4">
               <Link
-                href="https://git.new/scira"
+                href="https://git.new/miami"
                 className="flex items-center gap-2 px-3 py-2 text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-accent rounded-md transition-colors"
                 target="_blank"
               >
@@ -279,8 +279,8 @@ export default function AboutPage() {
         <div className="container max-w-4xl mx-auto text-center space-y-12">
           <div className="space-y-6">
             <div className="flex items-center justify-center gap-3 mb-8">
-              <SciraLogo className="size-12" />
-              <h1 className="text-4xl font-bold">Scira</h1>
+              <MiamiLogo className="size-12" />
+              <h1 className="text-4xl font-bold">Miami</h1>
             </div>
 
             <h2 className="text-2xl md:text-3xl font-semibold text-foreground max-w-3xl mx-auto">
@@ -316,7 +316,7 @@ export default function AboutPage() {
           {/* Action Buttons */}
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <Link
-              href="https://git.new/scira"
+              href="https://git.new/miami"
               className="inline-flex h-11 items-center gap-2 px-6 rounded-lg bg-foreground text-background hover:bg-foreground/90 transition-colors"
               target="_blank"
             >
@@ -414,15 +414,15 @@ export default function AboutPage() {
 
           <div className="text-center">
             <a
-              href="https://openalternative.co/scira?utm_source=openalternative&utm_medium=badge&utm_campaign=embed&utm_content=tool-scira"
+              href="https://openalternative.co/miami?utm_source=openalternative&utm_medium=badge&utm_campaign=embed&utm_content=tool-miami"
               target="_blank"
               className="inline-block"
             >
               <Image
-                src="https://openalternative.co/scira/badge.svg?theme=dark&width=200&height=50"
+                src="https://openalternative.co/miami/badge.svg?theme=dark&width=200&height=50"
                 width={200}
                 height={50}
-                alt="Scira badge"
+                alt="Miami badge"
                 className="mx-auto"
               />
             </a>
@@ -490,7 +490,7 @@ export default function AboutPage() {
               <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-4">
                 <Eye className="h-6 w-6 text-primary" />
               </div>
-              <h3 className="text-lg font-semibold mb-2">Scira Lookout</h3>
+              <h3 className="text-lg font-semibold mb-2">Miami Lookout</h3>
               <p className="text-muted-foreground">
                 Schedule automated searches to monitor trends and get regular updates on topics that matter to you.
               </p>
@@ -561,7 +561,7 @@ export default function AboutPage() {
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-muted/30 border border-border/30">
               <span className="text-sm text-muted-foreground">Powered by the best</span>
               <Button asChild variant="ghost" size="sm" className="h-6 px-2 text-xs text-primary hover:text-primary/80">
-                <Link href="https://git.new/scira" target="_blank">
+                <Link href="https://git.new/miami" target="_blank">
                   View source
                   <ArrowUpRight className="ml-1 h-3 w-3" />
                 </Link>
@@ -1052,7 +1052,7 @@ export default function AboutPage() {
                 </li>
                 <li className="flex items-start gap-3">
                   <div className="w-1.5 h-1.5 rounded-full bg-primary mt-2 flex-shrink-0"></div>
-                  <span className="text-muted-foreground">Scira Lookout</span>
+                  <span className="text-muted-foreground">Miami Lookout</span>
                 </li>
               </ul>
 
@@ -1085,14 +1085,14 @@ export default function AboutPage() {
         <div className="container max-w-4xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-2xl font-semibold mb-4">Frequently Asked Questions</h2>
-            <p className="text-muted-foreground max-w-2xl mx-auto">Find answers to common questions about Scira</p>
+            <p className="text-muted-foreground max-w-2xl mx-auto">Find answers to common questions about Miami</p>
           </div>
 
           <ProAccordion type="single" collapsible className="w-full">
             <ProAccordionItem value="item-1">
-              <ProAccordionTrigger>What is Scira?</ProAccordionTrigger>
+              <ProAccordionTrigger>What is Miami?</ProAccordionTrigger>
               <ProAccordionContent>
-                Scira is an open-source AI-powered search engine that uses RAG (Retrieval-Augmented Generation) and
+                Miami is an open-source AI-powered search engine that uses RAG (Retrieval-Augmented Generation) and
                 search grounding to provide accurate, up-to-date answers from reliable sources.
               </ProAccordionContent>
             </ProAccordionItem>
@@ -1123,17 +1123,17 @@ export default function AboutPage() {
             </ProAccordionItem>
 
             <ProAccordionItem value="item-5">
-              <ProAccordionTrigger>What AI models does Scira use?</ProAccordionTrigger>
+              <ProAccordionTrigger>What AI models does Miami use?</ProAccordionTrigger>
               <ProAccordionContent>
-                Scira uses a range of advanced AI models including Grok, Claude, OpenAI GPT, Gemini, and more to provide
+                Miami uses a range of advanced AI models including Grok, Claude, OpenAI GPT, Gemini, and more to provide
                 the best possible answers for different types of queries.
               </ProAccordionContent>
             </ProAccordionItem>
 
             <ProAccordionItem value="item-6">
-              <ProAccordionTrigger>How does Scira ensure information accuracy?</ProAccordionTrigger>
+              <ProAccordionTrigger>How does Miami ensure information accuracy?</ProAccordionTrigger>
               <ProAccordionContent>
-                Scira combines RAG technology with search grounding to retrieve information from reliable sources and
+                Miami combines RAG technology with search grounding to retrieve information from reliable sources and
                 verify it before providing answers. Each response includes source attribution for transparency.
               </ProAccordionContent>
             </ProAccordionItem>
@@ -1142,7 +1142,7 @@ export default function AboutPage() {
           <div className="text-center mt-12 space-y-6">
             <p className="text-muted-foreground">
               Have more questions?{' '}
-              <a href="mailto:zaid@scira.ai" className="text-primary hover:text-primary/80 transition-colors">
+              <a href="mailto:zaid@miami.ai" className="text-primary hover:text-primary/80 transition-colors">
                 Contact us
               </a>
             </p>
@@ -1151,7 +1151,7 @@ export default function AboutPage() {
             <div className="flex flex-col sm:flex-row sm:items-center gap-4 px-4 sm:px-6 py-4 rounded-xl bg-muted/40 border border-border/40 max-w-lg mx-auto">
               <div className="text-center sm:text-left flex-1">
                 <p className="text-sm font-medium text-foreground">Ready to get started?</p>
-                <p className="text-xs text-muted-foreground">Join thousands using Scira</p>
+                <p className="text-xs text-muted-foreground">Join thousands using Miami</p>
               </div>
               <div className="flex flex-col sm:flex-row gap-2 w-full sm:w-auto">
                 <Button onClick={() => router.push('/')} size="sm" className="px-4 py-2 text-sm w-full sm:w-auto">
@@ -1176,8 +1176,8 @@ export default function AboutPage() {
         <div className="container max-w-6xl mx-auto">
           <div className="flex flex-col md:flex-row items-center justify-between gap-6">
             <div className="flex items-center gap-3">
-              <SciraLogo className="size-8" />
-              <p className="text-sm text-muted-foreground">© {new Date().getFullYear()} Scira. All rights reserved.</p>
+              <MiamiLogo className="size-8" />
+              <p className="text-sm text-muted-foreground">© {new Date().getFullYear()} Miami. All rights reserved.</p>
             </div>
 
             <div className="flex items-center gap-6">
@@ -1192,14 +1192,14 @@ export default function AboutPage() {
               </Link>
               <div className="flex items-center gap-2">
                 <Link
-                  href="https://x.com/sciraai"
+                  href="https://x.com/miamiai"
                   className="p-2 text-muted-foreground hover:text-foreground transition-colors"
                   target="_blank"
                 >
                   <XLogoIcon className="h-4 w-4" />
                 </Link>
                 <Link
-                  href="https://git.new/scira"
+                  href="https://git.new/miami"
                   className="p-2 text-muted-foreground hover:text-foreground transition-colors"
                   target="_blank"
                 >

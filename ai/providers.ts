@@ -28,65 +28,65 @@ const huggingface = createOpenAI({
   apiKey: process.env.HF_TOKEN,
 });
 
-export const scira = customProvider({
+export const miami = customProvider({
   languageModels: {
-    'scira-default': xai('grok-4-fast-non-reasoning'),
-    'scira-nano': groq('llama-3.3-70b-versatile'),
-    'scira-name': huggingface.chat('meta-llama/Llama-3.3-70B-Instruct:cerebras'),
-    'scira-grok-3': xai('grok-3'),
-    'scira-grok-4': xai('grok-4'),
-    'scira-grok-4-fast': xai('grok-4-fast-non-reasoning'),
-    'scira-grok-4-fast-think': xai('grok-4-fast'),
-    'scira-code': xai('grok-code-fast-1'),
-    'scira-enhance': groq('moonshotai/kimi-k2-instruct'),
-    'scira-qwen-4b': huggingface.chat('Qwen/Qwen3-4B-Instruct-2507:nscale'),
-    'scira-qwen-4b-thinking': wrapLanguageModel({
+    'miami-default': xai('grok-4-fast-non-reasoning'),
+    'miami-nano': groq('llama-3.3-70b-versatile'),
+    'miami-name': huggingface.chat('meta-llama/Llama-3.3-70B-Instruct:cerebras'),
+    'miami-grok-3': xai('grok-3'),
+    'miami-grok-4': xai('grok-4'),
+    'miami-grok-4-fast': xai('grok-4-fast-non-reasoning'),
+    'miami-grok-4-fast-think': xai('grok-4-fast'),
+    'miami-code': xai('grok-code-fast-1'),
+    'miami-enhance': groq('moonshotai/kimi-k2-instruct'),
+    'miami-qwen-4b': huggingface.chat('Qwen/Qwen3-4B-Instruct-2507:nscale'),
+    'miami-qwen-4b-thinking': wrapLanguageModel({
       model: huggingface.chat('Qwen/Qwen3-4B-Thinking-2507:nscale'),
       middleware: [middlewareWithStartWithReasoning],
     }),
-    'scira-qwen-32b': wrapLanguageModel({
+    'miami-qwen-32b': wrapLanguageModel({
       model: groq('qwen/qwen3-32b'),
       middleware,
     }),
-    'scira-gpt-oss-20': wrapLanguageModel({
+    'miami-gpt-oss-20': wrapLanguageModel({
       model: groq('openai/gpt-oss-20b'),
       middleware,
     }),
-    'scira-gpt-oss-120': wrapLanguageModel({
+    'miami-gpt-oss-120': wrapLanguageModel({
       model: groq('openai/gpt-oss-120b'),
       middleware,
     }),
-    'scira-deepseek-chat': huggingface.chat('deepseek-ai/DeepSeek-V3.1-Terminus:novita'),
-    'scira-qwen-coder-small': huggingface.chat('Qwen/Qwen3-Coder-30B-A3B-Instruct:fireworks-ai'),
-    'scira-qwen-coder': huggingface.chat('Qwen/Qwen3-Coder-480B-A35B-Instruct:cerebras'),
-    'scira-qwen-30': huggingface.chat('Qwen/Qwen3-30B-A3B-Instruct-2507:nebius'),
-    'scira-qwen-30-think': wrapLanguageModel({
+    'miami-deepseek-chat': huggingface.chat('deepseek-ai/DeepSeek-V3.1-Terminus:novita'),
+    'miami-qwen-coder-small': huggingface.chat('Qwen/Qwen3-Coder-30B-A3B-Instruct:fireworks-ai'),
+    'miami-qwen-coder': huggingface.chat('Qwen/Qwen3-Coder-480B-A35B-Instruct:cerebras'),
+    'miami-qwen-30': huggingface.chat('Qwen/Qwen3-30B-A3B-Instruct-2507:nebius'),
+    'miami-qwen-30-think': wrapLanguageModel({
       model: huggingface.chat('Qwen/Qwen3-30B-A3B-Thinking-2507:nebius'),
       middleware,
     }),
-    'scira-qwen-3-next': huggingface.chat('Qwen/Qwen3-Next-80B-A3B-Instruct:hyperbolic'),
-    'scira-qwen-235': huggingface.chat('Qwen/Qwen3-235B-A22B-Instruct-2507:fireworks-ai'),
-    'scira-qwen-235-think': wrapLanguageModel({
+    'miami-qwen-3-next': huggingface.chat('Qwen/Qwen3-Next-80B-A3B-Instruct:hyperbolic'),
+    'miami-qwen-235': huggingface.chat('Qwen/Qwen3-235B-A22B-Instruct-2507:fireworks-ai'),
+    'miami-qwen-235-think': wrapLanguageModel({
       model: huggingface.chat('Qwen/Qwen3-235B-A22B-Thinking-2507:fireworks-ai'),
       middleware: [middlewareWithStartWithReasoning],
     }),
-    'scira-glm-air': huggingface.chat('zai-org/GLM-4.5-Air:fireworks-ai'),
-    'scira-glm': wrapLanguageModel({
+    'miami-glm-air': huggingface.chat('zai-org/GLM-4.5-Air:fireworks-ai'),
+    'miami-glm': wrapLanguageModel({
       model: huggingface.chat('zai-org/GLM-4.5:fireworks-ai'),
       middleware,
     }),
-    'scira-kimi-k2': groq('moonshotai/kimi-k2-instruct-0905'),
-    'scira-kimi-k2-v2': groq('moonshotai/kimi-k2-instruct-0905'),
-    'scira-haiku': anthropic('claude-3-5-haiku-20241022'),
-    'scira-mistral-medium': mistral('mistral-medium-2508'),
-    'scira-magistral-small': mistral('magistral-small-2509'),
-    'scira-magistral-medium': mistral('magistral-medium-2509'),
-    'scira-google-lite': google('gemini-2.5-flash-lite'),
-    'scira-google': google('gemini-2.5-flash'),
-    'scira-google-pro': google('gemini-2.5-pro'),
-    'scira-anthropic-3': anthropic('claude-3-7-sonnet-20250219'),
-    'scira-anthropic': anthropic('claude-sonnet-4-20250514'),
-    'scira-llama-4': groq('meta-llama/llama-4-maverick-17b-128e-instruct'),
+    'miami-kimi-k2': groq('moonshotai/kimi-k2-instruct-0905'),
+    'miami-kimi-k2-v2': groq('moonshotai/kimi-k2-instruct-0905'),
+    'miami-haiku': anthropic('claude-3-5-haiku-20241022'),
+    'miami-mistral-medium': mistral('mistral-medium-2508'),
+    'miami-magistral-small': mistral('magistral-small-2509'),
+    'miami-magistral-medium': mistral('magistral-medium-2509'),
+    'miami-google-lite': google('gemini-2.5-flash-lite'),
+    'miami-google': google('gemini-2.5-flash'),
+    'miami-google-pro': google('gemini-2.5-pro'),
+    'miami-anthropic-3': anthropic('claude-3-7-sonnet-20250219'),
+    'miami-anthropic': anthropic('claude-sonnet-4-20250514'),
+    'miami-llama-4': groq('meta-llama/llama-4-maverick-17b-128e-instruct'),
   },
 });
 
@@ -120,7 +120,7 @@ interface Model {
 export const models: Model[] = [
   // Models (xAI)
   {
-    value: 'scira-grok-3',
+    value: 'miami-grok-3',
     label: 'Grok 3',
     description: "xAI's recent smartest LLM",
     vision: false,
@@ -134,7 +134,7 @@ export const models: Model[] = [
     maxOutputTokens: 16000,
   },
   {
-    value: 'scira-grok-4',
+    value: 'miami-grok-4',
     label: 'Grok 4',
     description: "xAI's most intelligent LLM",
     vision: true,
@@ -148,7 +148,7 @@ export const models: Model[] = [
     maxOutputTokens: 16000,
   },
   {
-    value: 'scira-default',
+    value: 'miami-default',
     label: 'Grok 4 Fast',
     description: "xAI's fastest intelligent vision LLM",
     vision: true,
@@ -163,7 +163,7 @@ export const models: Model[] = [
     fast: true,
   },
   {
-    value: 'scira-grok-4-fast-think',
+    value: 'miami-grok-4-fast-think',
     label: 'Grok 4 Fast Thinking',
     description: "xAI's fastest intelligent vision LLM",
     vision: true,
@@ -178,7 +178,7 @@ export const models: Model[] = [
     fast: true,
   },
   {
-    value: 'scira-qwen-32b',
+    value: 'miami-qwen-32b',
     label: 'Qwen 3 32B',
     description: "Alibaba's advanced reasoning LLM",
     vision: false,
@@ -198,7 +198,7 @@ export const models: Model[] = [
     },
   },
   {
-    value: 'scira-qwen-4b',
+    value: 'miami-qwen-4b',
     label: 'Qwen 3 4B',
     description: "Alibaba's small base LLM",
     vision: false,
@@ -218,7 +218,7 @@ export const models: Model[] = [
     },
   },
   {
-    value: 'scira-qwen-4b-thinking',
+    value: 'miami-qwen-4b-thinking',
     label: 'Qwen 3 4B Thinking',
     description: "Alibaba's small base LLM",
     vision: false,
@@ -238,7 +238,7 @@ export const models: Model[] = [
     },
   },
   {
-    value: 'scira-gpt-oss-20',
+    value: 'miami-gpt-oss-20',
     label: 'GPT OSS 20B',
     description: "OpenAI's small OSS LLM",
     vision: false,
@@ -253,7 +253,7 @@ export const models: Model[] = [
     fast: true,
   },
   {
-    value: 'scira-google-lite',
+    value: 'miami-google-lite',
     label: 'Gemini 2.5 Flash Lite',
     description: "Google's advanced small LLM",
     vision: true,
@@ -267,7 +267,7 @@ export const models: Model[] = [
     maxOutputTokens: 10000,
   },
   {
-    value: 'scira-code',
+    value: 'miami-code',
     label: 'Grok Code',
     description: "xAI's advanced coding LLM",
     vision: false,
@@ -282,7 +282,7 @@ export const models: Model[] = [
     fast: true,
   },
   {
-    value: 'scira-mistral-medium',
+    value: 'miami-mistral-medium',
     label: 'Mistral Medium',
     description: "Mistral's medium multi-modal LLM",
     vision: true,
@@ -296,7 +296,7 @@ export const models: Model[] = [
     maxOutputTokens: 16000,
   },
   {
-    value: 'scira-magistral-small',
+    value: 'miami-magistral-small',
     label: 'Magistral Small',
     description: "Mistral's small reasoning LLM",
     vision: true,
@@ -310,7 +310,7 @@ export const models: Model[] = [
     maxOutputTokens: 16000,
   },
   {
-    value: 'scira-magistral-medium',
+    value: 'miami-magistral-medium',
     label: 'Magistral Medium',
     description: "Mistral's medium reasoning LLM",
     vision: true,
@@ -324,7 +324,7 @@ export const models: Model[] = [
     maxOutputTokens: 16000,
   },
   {
-    value: 'scira-gpt-oss-120',
+    value: 'miami-gpt-oss-120',
     label: 'GPT OSS 120B',
     description: "OpenAI's advanced OSS LLM",
     vision: false,
@@ -339,7 +339,7 @@ export const models: Model[] = [
     fast: true,
   },
   {
-    value: 'scira-deepseek-chat',
+    value: 'miami-deepseek-chat',
     label: 'DeepSeek Chat',
     description: "DeepSeek's advanced chat LLM",
     vision: false,
@@ -353,7 +353,7 @@ export const models: Model[] = [
     maxOutputTokens: 16000,
   },
   {
-    value: 'scira-qwen-coder',
+    value: 'miami-qwen-coder',
     label: 'Qwen 3 Coder 480B-A35B',
     description: "Alibaba's advanced coding LLM",
     vision: false,
@@ -368,7 +368,7 @@ export const models: Model[] = [
     fast: true,
   },
   {
-    value: 'scira-anthropic-3',
+    value: 'miami-anthropic-3',
     label: 'Claude 3.7 Sonnet',
     description: "Anthropic's recent advanced LLM",
     vision: true,
@@ -382,7 +382,7 @@ export const models: Model[] = [
     maxOutputTokens: 8000,
   },
   {
-    value: 'scira-anthropic',
+    value: 'miami-anthropic',
     label: 'Claude 4 Sonnet',
     description: "Anthropic's most advanced LLM",
     vision: true,
@@ -396,7 +396,7 @@ export const models: Model[] = [
     maxOutputTokens: 8000,
   },
   {
-    value: 'scira-qwen-3-next',
+    value: 'miami-qwen-3-next',
     label: 'Qwen 3 Next 80B A3B Instruct',
     description: "Qwen's advanced instruct LLM",
     vision: false,
@@ -417,7 +417,7 @@ export const models: Model[] = [
     },
   },
   {
-    value: 'scira-qwen-235',
+    value: 'miami-qwen-235',
     label: 'Qwen 3 235B A22B',
     description: "Qwen's advanced instruct LLM",
     vision: false,
@@ -436,7 +436,7 @@ export const models: Model[] = [
     },
   },
   {
-    value: 'scira-qwen-235-think',
+    value: 'miami-qwen-235-think',
     label: 'Qwen 3 235B A22B Thinking',
     description: "Qwen's advanced thinking LLM",
     vision: false,
@@ -455,7 +455,7 @@ export const models: Model[] = [
     },
   },
   {
-    value: 'scira-kimi-k2-v2',
+    value: 'miami-kimi-k2-v2',
     label: 'Kimi K2 Latest',
     description: "MoonShot AI's advanced base LLM",
     vision: false,
@@ -473,7 +473,7 @@ export const models: Model[] = [
     },
   },
   {
-    value: 'scira-glm-air',
+    value: 'miami-glm-air',
     label: 'GLM 4.5 Air',
     description: "Zhipu AI's efficient base LLM",
     vision: false,
@@ -487,7 +487,7 @@ export const models: Model[] = [
     maxOutputTokens: 130000,
   },
   {
-    value: 'scira-glm',
+    value: 'miami-glm',
     label: 'GLM 4.5',
     description: "Zhipu AI's advanced base LLM",
     vision: false,
@@ -501,7 +501,7 @@ export const models: Model[] = [
     maxOutputTokens: 13000,
   },
   {
-    value: 'scira-google',
+    value: 'miami-google',
     label: 'Gemini 2.5 Flash',
     description: "Google's advanced small LLM",
     vision: true,
@@ -515,7 +515,7 @@ export const models: Model[] = [
     maxOutputTokens: 10000,
   },
   {
-    value: 'scira-google-pro',
+    value: 'miami-google-pro',
     label: 'Gemini 2.5 Pro',
     description: "Google's most advanced LLM",
     vision: true,

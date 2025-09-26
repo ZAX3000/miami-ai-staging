@@ -17,7 +17,7 @@ import {
   JsonToSseTransformStream,
 } from 'ai';
 import { createMemoryTools } from '@/lib/tools/supermemory';
-import { scira, requiresAuthentication, requiresProSubscription, shouldBypassRateLimits, models, getModelParameters } from '@/ai/providers';
+import { miami, requiresAuthentication, requiresProSubscription, shouldBypassRateLimits, models, getModelParameters } from '@/ai/providers';
 import {
   createStreamId,
   getChatById,
@@ -114,7 +114,7 @@ export function getStreamContext() {
     try {
       globalStreamContext = createResumableStreamContext({
         waitUntil: after,
-        keyPrefix: 'scira-ai',
+        keyPrefix: 'miami-ai',
       });
     } catch (error: any) {
       if (error.message.includes('REDIS_URL')) {
@@ -443,7 +443,7 @@ export async function POST(req: Request) {
       const streamStartTime = Date.now();
 
       const result = streamText({
-        model: scira.languageModel(model),
+        model: miami.languageModel(model),
         messages: convertToModelMessages(messages),
         ...getModelParameters(model),
         stopWhen: stepCountIs(5),
@@ -463,20 +463,20 @@ export async function POST(req: Request) {
         toolChoice: 'auto',
         providerOptions: {
           openai: {
-            ...model !== "scira-qwen-coder"
+            ...model !== "miami-qwen-coder"
               ? {
                 parallelToolCalls: false,
               }
               : {}
           },
           groq: {
-            ...(model === 'scira-gpt-oss-20' || model === 'scira-gpt-oss-120'
+            ...(model === 'miami-gpt-oss-20' || model === 'miami-gpt-oss-120'
               ? {
                 reasoningEffort: 'medium',
                 reasoningFormat: "hidden",
               }
               : {}),
-            ...(model === 'scira-qwen-32b'
+            ...(model === 'miami-qwen-32b'
               ? {
                 reasoningEffort: 'none',
               }
@@ -547,7 +547,7 @@ export async function POST(req: Request) {
           }
 
           const { object: repairedArgs } = await generateObject({
-            model: scira.languageModel('scira-grok-4-fast'),
+            model: miami.languageModel('miami-grok-4-fast'),
             schema: tool.inputSchema,
             prompt: [
               `The model tried to call the tool "${toolCall.toolName}"` + ` with the following arguments:`,
